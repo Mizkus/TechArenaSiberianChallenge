@@ -1,0 +1,27 @@
+#!/bin/bash
+
+#example of how shell script of index build should work
+
+# Parse command-line arguments
+for i in "$@"
+do
+    case $i in
+        --data=*)
+        DATA="${i#*=}"
+        shift # past argument=value
+        ;;
+        *)
+        echo "Unknown option: $i"
+        exit 1
+        ;;
+    esac
+done
+
+# Check if DATA is set
+if [ -z "$DATA" ]; then
+    echo "Error: --data is required"
+    exit 1
+fi
+
+echo "Data is $DATA"
+python3 build_index.py ${DATA}

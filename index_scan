@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Extract the query parameter
+for arg in "$@"
+do
+    case $arg in
+        --query=*)
+        QUERY="${arg#*=}"
+        shift # Remove --query=... from processing
+        ;;
+    esac
+done
+
+# Call the other script with the binary file as argument
+#./bruteforce_scan ${QUERY}
+python3 ./scan_index.py ${QUERY}
